@@ -7,6 +7,8 @@ import com.manoj.springbootdepartmentservice.service.DepartmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class DepartmentServiceImplementation implements DepartmentService {
@@ -33,7 +35,8 @@ public class DepartmentServiceImplementation implements DepartmentService {
 
     @Override
     public DepartmentDto findByDepartmentCode(String departmentCode) {
-        Department department = departmentRepository.findDepartmentByDepartmentCode(departmentCode);
+        Optional<Department> departmentOption = departmentRepository.findDepartmentByDepartmentCode(departmentCode);
+        Department department = departmentOption.get();
         DepartmentDto departmentDto = new DepartmentDto(
                 department.getId(),
                 department.getDepartmentName(),

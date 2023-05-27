@@ -7,7 +7,3 @@ use department_db;
 SELECT * FROM department;
 
 DROP TABLE department;
-
-use employees_db;
-
-SELECT * FROM employees;
