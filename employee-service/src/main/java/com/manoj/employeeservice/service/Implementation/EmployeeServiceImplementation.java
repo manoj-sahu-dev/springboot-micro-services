@@ -7,11 +7,11 @@ import com.manoj.employeeservice.entity.Employee;
 import com.manoj.employeeservice.exception.EmailAlreadyExistException;
 import com.manoj.employeeservice.exception.ResourceNotFoundException;
 import com.manoj.employeeservice.repository.EmployeeRepository;
+import com.manoj.employeeservice.service.APIClient;
 import com.manoj.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private ModelMapper modelMapper;
     //    private RestTemplate restTemplate;
-    private WebClient webClient;
+//    private WebClient webClient;
+    private APIClient apiClient;
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
@@ -54,7 +55,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
         System.out.println(url);
 //        ResponseEntity<DepartmentDto> departmentDtoResponseEntity = restTemplate.getForEntity(url, DepartmentDto.class);
 //        DepartmentDto departmentDto = departmentDtoResponseEntity.getBody();
-        DepartmentDto departmentDto = webClient.get().uri(url).retrieve().bodyToMono(DepartmentDto.class).block();
+//        DepartmentDto departmentDto = webClient.get().uri(url).retrieve().bodyToMono(DepartmentDto.class).block();
+        DepartmentDto departmentDto = apiClient.findByDepartmentCode(departmentCode);
         ApiResponseDto apiResponseDto = new ApiResponseDto();
         apiResponseDto.setEmployee(modelMapper.map(employee, EmployeeDto.class));
         apiResponseDto.setDepartment(departmentDto);
