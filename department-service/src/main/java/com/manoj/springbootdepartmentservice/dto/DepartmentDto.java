@@ -1,6 +1,5 @@
-package com.manoj.springbootdepartmentservice.entity;
+package com.manoj.springbootdepartmentservice.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "department")
-public class Department {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DepartmentDto {
     private Long id;
     private String departmentName;
     private String departmentDescription;
