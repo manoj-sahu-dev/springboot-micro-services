@@ -10,9 +10,8 @@ import com.manoj.employeeservice.repository.EmployeeRepository;
 import com.manoj.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +21,8 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImplementation implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private ModelMapper modelMapper;
-    private RestTemplate restTemplate;
+    //    private RestTemplate restTemplate;
+    private WebClient webClient;
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
@@ -52,8 +52,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
         String departmentCode = employee.getDepartmentCode();
         String url = "http://localhost:8080/api/departments/get/" + departmentCode;
         System.out.println(url);
-        ResponseEntity<DepartmentDto> departmentDtoResponseEntity = restTemplate.getForEntity(url, DepartmentDto.class);
-        DepartmentDto departmentDto = departmentDtoResponseEntity.getBody();
+//        ResponseEntity<DepartmentDto> departmentDtoResponseEntity = restTemplate.getForEntity(url, DepartmentDto.class);
+//        DepartmentDto departmentDto = departmentDtoResponseEntity.getBody();
+        DepartmentDto departmentDto = webClient.get().uri(url).retrieve().bodyToMono(DepartmentDto.class).block();
         ApiResponseDto apiResponseDto = new ApiResponseDto();
         apiResponseDto.setEmployee(modelMapper.map(employee, EmployeeDto.class));
         apiResponseDto.setDepartment(departmentDto);
