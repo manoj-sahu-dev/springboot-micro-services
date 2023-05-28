@@ -24,3 +24,4 @@ springboot micro services
 1. Create Spring boot project as Microservice (api gateway)
 2. Register API-Gateway as Eureka Client to Eureka Server (Service Registry)
 3. Configuring API Gateway Routes and Test using Postman Client
+4. Using Spring Cloud Gateway to Automatically Create Routes
