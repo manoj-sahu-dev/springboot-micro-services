@@ -1,5 +1,5 @@
-# springboot-micro-services
-springboot micro services
+# spring-boot-micro-services
+spring-boot microservices
 
 ## Spring cloud Netflix eureka server implementation - 
 ### Development Steps
@@ -25,3 +25,13 @@ springboot micro services
 2. Register API-Gateway as Eureka Client to Eureka Server (Service Registry)
 3. Configuring API Gateway Routes and Test using Postman Client
 4. Using Spring Cloud Gateway to Automatically Create Routes
+
+## Config Server 
+### Development Steps
+1. Create Spring boot project as Microservice
+   (config-server) ►
+2. Register Config-Server as Eureka Client
+3. Set up Git Location for Config Server
+4. Refactor Department-Service to use Config Server
+5. Refactor Employee-Service to use Config Server
+6. Refresh Use case
